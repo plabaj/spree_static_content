@@ -15,7 +15,7 @@ class Spree::StaticContentController < Spree::BaseController
       request.path
     end
     path = path.gsub('//','/')
-    path = StaticPage::remove_spree_mount_point(path) unless Rails.application.routes.named_routes[:spree].path == "/"
+    path = StaticPage::remove_spree_mount_point(path) unless Rails.application.routes.named_routes[:spree].path.spec.to_s == "/"
     
     unless @page = Spree::Page.visible.find_by_slug(path)
       render_404
